@@ -1,149 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>UNION AI</title>
 
 <style>
-    * {
-        box-sizing: border-box;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #05070b;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    text-align: center;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: 8px;
+}
+
+.subtitle {
+    font-size: 11px;
+    letter-spacing: 3px;
+    opacity: .6;
+    margin-top: 6px;
+    margin-bottom: 45px;
+}
+
+/* UNION CORE */
+
+.core {
+    width: 230px;
+    height: 230px;
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: .3s;
+    animation: pulse 3s infinite ease-in-out;
+}
+
+.core::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border: 1px solid white;
+    border-radius: 50%;
+    animation: spin 12s linear infinite;
+}
+
+.core::after {
+    content: "★";
+    font-size: 82px;
+    position: absolute;
+    animation: glow 2s infinite alternate;
+}
+
+.listening {
+    animation: listening 0.8s infinite alternate;
+}
+
+.status {
+    margin-top: 30px;
+    font-size: 13px;
+    letter-spacing: 3px;
+    opacity: .7;
+}
+
+button {
+    margin-top: 25px;
+    padding: 17px 32px;
+    border: 1px solid white;
+    border-radius: 40px;
+    background: transparent;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(.95);
+}
+
+.message {
+    margin-top: 25px;
+    min-height: 45px;
+    font-size: 15px;
+    line-height: 1.5;
+    opacity: .85;
+}
+
+@keyframes pulse {
+    0%,100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255,255,255,.1);
     }
 
-    body {
-        margin: 0;
-        min-height: 100vh;
-        background: #05070b;
-        color: white;
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
+    50% {
+        transform: scale(1.04);
+        box-shadow: 0 0 45px rgba(255,255,255,.25);
+    }
+}
+
+@keyframes listening {
+    from {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255,255,255,.2);
     }
 
-    .container {
-        text-align: center;
-        width: 100%;
-        max-width: 500px;
-        padding: 30px;
+    to {
+        transform: scale(1.1);
+        box-shadow: 0 0 70px rgba(255,255,255,.7);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
     }
 
-    .title {
-        font-size: 42px;
-        font-weight: bold;
-        letter-spacing: 8px;
-        margin-bottom: 5px;
+    to {
+        transform: rotate(360deg);
     }
+}
 
-    .subtitle {
-        font-size: 12px;
-        letter-spacing: 3px;
-        opacity: .6;
-        margin-bottom: 50px;
-    }
-
-    /* UNION symbol */
-
-    .core {
-        width: 230px;
-        height: 230px;
-        margin: auto;
-        border: 2px solid #ffffff;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        animation: pulse 3s infinite ease-in-out;
-    }
-
-    .core::before {
-        content: "";
-        position: absolute;
-        width: 180px;
-        height: 180px;
-        border: 1px solid #ffffff;
-        border-radius: 50%;
-        animation: spin 12s linear infinite;
-    }
-
-    .core::after {
-        content: "★";
-        font-size: 85px;
-        position: absolute;
-        animation: glow 2s infinite alternate;
-    }
-
-    .status {
-        margin-top: 35px;
-        font-size: 13px;
-        letter-spacing: 3px;
-        opacity: .7;
-    }
-
-    button {
-        margin-top: 25px;
-        padding: 18px 35px;
-        border: 1px solid white;
-        border-radius: 40px;
-        background: transparent;
-        color: white;
-        font-size: 15px;
-        font-weight: bold;
-        letter-spacing: 2px;
-        cursor: pointer;
-        transition: .3s;
-    }
-
-    button:hover {
-        background: white;
-        color: black;
-    }
-
-    button:active {
+@keyframes glow {
+    from {
+        opacity: .5;
         transform: scale(.95);
     }
 
-    .message {
-        margin-top: 30px;
-        min-height: 30px;
-        font-size: 15px;
-        opacity: .8;
+    to {
+        opacity: 1;
+        transform: scale(1.08);
     }
-
-    @keyframes pulse {
-        0%,100% {
-            transform: scale(1);
-            box-shadow: 0 0 10px rgba(255,255,255,.1);
-        }
-
-        50% {
-            transform: scale(1.04);
-            box-shadow: 0 0 45px rgba(255,255,255,.25);
-        }
-    }
-
-    @keyframes spin {
-        from {
-            transform: rotate(0deg);
-        }
-
-        to {
-            transform: rotate(360deg);
-        }
-    }
-
-    @keyframes glow {
-        from {
-            opacity: .5;
-            transform: scale(.95);
-        }
-
-        to {
-            opacity: 1;
-            transform: scale(1.08);
-        }
-    }
+}
 </style>
 </head>
 
@@ -157,14 +171,14 @@
         UNITED INTELLIGENCE & OPERATIONS NETWORK
     </div>
 
-    <div class="core"></div>
+    <div class="core" id="core"></div>
 
     <div class="status" id="status">
         SYSTEM READY
     </div>
 
-    <button onclick="activateUnion()">
-        TALK TO UNION
+    <button onclick="startListening()">
+        🎙 TALK TO UNION
     </button>
 
     <div class="message" id="message"></div>
@@ -173,34 +187,173 @@
 
 <script>
 
-function activateUnion() {
+const WORKER_URL =
+"https://broken-rain-cd69.joseph-higginstrma.workers.dev/";
 
-    const status = document.getElementById("status");
-    const message = document.getElementById("message");
+const SpeechRecognition =
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
 
-    status.innerText = "LISTENING...";
+let recognition;
 
-    message.innerText = "UNION is ready.";
+if (SpeechRecognition) {
 
-    if ("speechSynthesis" in window) {
+    recognition = new SpeechRecognition();
 
-        const speech = new SpeechSynthesisUtterance(
-            "UNION online. How may I assist you?"
+    recognition.lang = "en-US";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onstart = function() {
+
+        document.getElementById("status").innerText =
+        "LISTENING...";
+
+        document.getElementById("core")
+        .classList.add("listening");
+    };
+
+    recognition.onresult = async function(event) {
+
+        const text =
+        event.results[0][0].transcript;
+
+        document.getElementById("message").innerText =
+        '"' + text + '"';
+
+        document.getElementById("status").innerText =
+        "UNION THINKING...";
+
+        await askUnion(text);
+    };
+
+    recognition.onerror = function(event) {
+
+        document.getElementById("status").innerText =
+        "VOICE ERROR";
+
+        document.getElementById("core")
+        .classList.remove("listening");
+
+        document.getElementById("message").innerText =
+        "Microphone error: " + event.error;
+    };
+
+    recognition.onend = function() {
+
+        document.getElementById("core")
+        .classList.remove("listening");
+    };
+
+}
+
+function startListening() {
+
+    if (!recognition) {
+
+        alert(
+        "Voice recognition isn't supported by this browser."
         );
 
-        speech.rate = 0.9;
-        speech.pitch = 0.8;
-
-        speechSynthesis.speak(speech);
-
-        speech.onend = function() {
-            status.innerText = "SYSTEM READY";
-        };
-
-    } else {
-
-        status.innerText = "VOICE UNAVAILABLE";
+        return;
     }
+
+    document.getElementById("message").innerText = "";
+
+    recognition.start();
+}
+
+
+async function askUnion(message) {
+
+    try {
+
+        const response =
+        await fetch(WORKER_URL, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                message: message
+            })
+
+        });
+
+        const data =
+        await response.json();
+
+        if (data.error) {
+
+            throw new Error(data.error);
+        }
+
+        const answer =
+        data.response;
+
+        document.getElementById("message").innerText =
+        answer;
+
+        document.getElementById("status").innerText =
+        "UNION RESPONDING...";
+
+        speak(answer);
+
+    }
+
+    catch (error) {
+
+        document.getElementById("status").innerText =
+        "CONNECTION ERROR";
+
+        document.getElementById("message").innerText =
+        error.message;
+
+    }
+
+}
+
+
+function speak(text) {
+
+    if (!("speechSynthesis" in window)) {
+
+        document.getElementById("status").innerText =
+        "RESPONSE READY";
+
+        return;
+    }
+
+    speechSynthesis.cancel();
+
+    const voice =
+    new SpeechSynthesisUtterance(text);
+
+    voice.rate = 0.95;
+    voice.pitch = 0.85;
+
+    voice.onstart = function() {
+
+        document.getElementById("status").innerText =
+        "UNION SPEAKING...";
+
+        document.getElementById("core")
+        .classList.add("listening");
+    };
+
+    voice.onend = function() {
+
+        document.getElementById("status").innerText =
+        "SYSTEM READY";
+
+        document.getElementById("core")
+        .classList.remove("listening");
+    };
+
+    speechSynthesis.speak(voice);
 }
 
 </script>
